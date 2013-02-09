@@ -1,0 +1,4 @@
+# GCC Created Files #
+*.d
+*.o
+.DS_Store
