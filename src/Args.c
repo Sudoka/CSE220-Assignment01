@@ -1,6 +1,4 @@
-#include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 #ifndef GLOBAL
 #define GLOBAL
 #include "global.h"
@@ -14,8 +12,8 @@ void parseArgs(int numArgs, char* args[]) {
 	int opt = 0;
 
 	globalArgs.csv = 0;
-	globalArgs.inFile = "";
-	globalArgs.outFile = "";
+	globalArgs.inFilePath = NULL;
+	globalArgs.outFileName = NULL;
 	globalArgs.help = 0;
 	globalArgs.versionInfo = 0;
 
@@ -27,11 +25,11 @@ void parseArgs(int numArgs, char* args[]) {
 				break;
 				
 			case 'f':
-				globalArgs.inFile = optarg;
+				globalArgs.inFilePath = optarg;
 				break;
 				
 			case 'o':				
-				globalArgs.outFile = optarg;				
+				globalArgs.outFileName = optarg;				
 				break;
 				
 			case 'v':

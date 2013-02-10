@@ -1,12 +1,16 @@
+#include <stdio.h>
+
 struct globalArgs_t {
    int csv;  //CSV option
-   char* inFile;
-   char* outFile;
+   char* inFilePath;
+   FILE* inFile;
+   char* outFileName;
+   FILE* outFile;
    int help; //help option
    int versionInfo; //version option
 };
 
-struct FrequencyData {
+struct pairFrequencyData {
 	char* pair;
 	int occurance;
 	int frequency;
@@ -14,6 +18,6 @@ struct FrequencyData {
 };
 
 extern struct globalArgs_t globalArgs;
-extern struct FrequencyData freqData;
+extern struct pairFrequencyData freqData;
 
 void parseArgs(int numArgs, char* args[]);
