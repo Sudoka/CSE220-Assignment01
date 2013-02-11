@@ -10,14 +10,18 @@ struct globalArgs_t {
    int versionInfo; //version option
 };
 
-struct pairFrequencyData {
+ typedef struct {
+   char letter;
+   int occurance;
+   int frequency;
+} singleFrequencyData;
+
+typedef struct {   
 	char* pair;
 	int occurance;
 	int frequency;
-
-};
+} pairFrequencyData ;
 
 extern struct globalArgs_t globalArgs;
-extern struct pairFrequencyData freqData;
 
 void parseArgs(int numArgs, char* args[]);

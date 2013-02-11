@@ -5,7 +5,20 @@
 #include "global.h"
 #endif
 
-char* input;
+char *input;
+char *alphabet;
+
+singleFrequencyData *singleFreqData;
+pairFrequencyData *pairFreqData;
+
+
+
+void initAlphabet() {
+	for(int i = 'a'; i<= 'z'; i++) {		
+		singleFreqData[i-97].letter =(char) i;
+	}
+
+}
 
 void printHelp() {
 	printf("Options:\n");
@@ -54,9 +67,18 @@ int main( int argc, char* argv[] ) {
 		input = (char*) malloc(10000);
 		fgets(input, 10000, stdin);
 		free(input);
-	}
+	}	
 
-	printf("%s", input);
+	alphabet = (char*) malloc(sizeof(char)*27);
+	alphabet[26] = '\0';
+
+	initAlphabet();
+	
+	for(int i = 0; i<676; i++) {
+		printf("%s\n", pairFreqData[i].pair );
+	}
+	
+
 
 	return 0;
 
