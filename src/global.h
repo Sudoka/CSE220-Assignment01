@@ -1,4 +1,6 @@
 #include <stdio.h>
+#ifndef GLOBAL
+#define GLOBAL
 
 struct globalArgs_t {
    int csv;  //CSV option
@@ -20,8 +22,8 @@ typedef struct {
 	char* pair;
 	int occurance;
 	int frequency;
-} pairFrequencyData ;
+} pairFrequencyData;
 
 extern struct globalArgs_t globalArgs;
 
-void parseArgs(int numArgs, char* args[]);
+#endif

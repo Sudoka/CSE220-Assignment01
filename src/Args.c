@@ -1,9 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
-#ifndef GLOBAL
-#define GLOBAL
 #include "global.h"
-#endif
+#include "Args.h"
 
 static const char *optString = "cf:ho:v";
 
@@ -40,7 +38,8 @@ void parseArgs(int numArgs, char* args[]) {
 			case 'h':
 				globalArgs.help = 1;
 				break;
-			default:	
+			default:
+				printf("Please enter a vaild argument\n");
 				exit(EXIT_FAILURE);					
 				break;
 		}

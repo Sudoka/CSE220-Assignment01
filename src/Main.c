@@ -1,25 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef GLOBAL
-#define GLOBAL
 #include "global.h"
-#endif
+#include "Args.h"
 
 char *input;
-char *alphabet;
 
 singleFrequencyData singleFreqData[26];
 pairFrequencyData pairFreqData[676];
 
-void initAlphabet() {
+static void initAlphabet() {
 	for(int i = 'a'; i<= 'z'; i++) {		
 		singleFreqData[i-'a'].letter = (char) i;
 	}
-
 }
 
-void printHelp() {
+static void printHelp() {
 	printf("Options:\n");
 	printf("\t%s\t\t%s\n", "-c", "Print results in csv format.");
 	printf("\t%s\t\t%s\n", "-f file", "Read the text from 'file'.");
@@ -36,17 +32,15 @@ int main( int argc, char* argv[] ) {
 		printHelp();
 		exit(EXIT_SUCCESS);		
 	} 
-	else if (globalArgs.inFilePath !=NULL) {
-		printf("hit\n");
+	else if (globalArgs.inFilePath !=NULL) {		
 		size_t len;
 		globalArgs.inFile = fopen(globalArgs.inFilePath, "r");
 
 		if(globalArgs.inFile == NULL) {
 			fprintf(stderr, "File does not exist: %s\n", globalArgs.inFilePath);
-			return 1;
+			return EXIT_FAILURE;
 		}
 
-		
 		fseek(globalArgs.inFile, 0, SEEK_END);
 		len = ftell(globalArgs.inFile);
 		rewind(globalArgs.inFile);
@@ -72,14 +66,6 @@ int main( int argc, char* argv[] ) {
 	}	
 
 	initAlphabet();
-
-	printf("%s\n", input );
-	
-	for(int i = 0; i<26; i++) {
-		printf("%c\n", singleFreqData[i].letter );
-	}
-
-	printf("%d\n", (int)strlen(input));
 	
 	return 0;
 
