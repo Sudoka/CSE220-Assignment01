@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #ifndef GLOBAL
 #define GLOBAL
 #include "global.h"
@@ -8,14 +9,12 @@
 char *input;
 char *alphabet;
 
-singleFrequencyData *singleFreqData;
-pairFrequencyData *pairFreqData;
-
-
+singleFrequencyData singleFreqData[26];
+pairFrequencyData pairFreqData[676];
 
 void initAlphabet() {
 	for(int i = 'a'; i<= 'z'; i++) {		
-		singleFreqData[i-97].letter =(char) i;
+		singleFreqData[i-'a'].letter = (char) i;
 	}
 
 }
@@ -29,7 +28,8 @@ void printHelp() {
 	printf("\t%s\t\t%s\n", "-v", "Read the Display version info and exit.");
 }
 
-int main( int argc, char* argv[] ) {	
+int main( int argc, char* argv[] ) {
+
 	parseArgs(argc, argv);
 
 	if (globalArgs.help) {
@@ -37,6 +37,7 @@ int main( int argc, char* argv[] ) {
 		exit(EXIT_SUCCESS);		
 	} 
 	else if (globalArgs.inFilePath !=NULL) {
+		printf("hit\n");
 		size_t len;
 		globalArgs.inFile = fopen(globalArgs.inFilePath, "r");
 
@@ -49,6 +50,7 @@ int main( int argc, char* argv[] ) {
 		fseek(globalArgs.inFile, 0, SEEK_END);
 		len = ftell(globalArgs.inFile);
 		rewind(globalArgs.inFile);
+		printf("%d\n", (int)len);
 
 		//Alocating memory for input
 		input = (char*) malloc(sizeof(char) * len + 1);
@@ -60,7 +62,7 @@ int main( int argc, char* argv[] ) {
 		}
 
 		fread(input, sizeof(char), len, globalArgs.inFile);
-		fclose(globalArgs.inFile);
+		fclose(globalArgs.inFile);		
 
 	}
 	else {
@@ -69,17 +71,16 @@ int main( int argc, char* argv[] ) {
 		free(input);
 	}	
 
-	alphabet = (char*) malloc(sizeof(char)*27);
-	alphabet[26] = '\0';
-
 	initAlphabet();
+
+	printf("%s\n", input );
 	
-	for(int i = 0; i<676; i++) {
-		printf("%s\n", pairFreqData[i].pair );
+	for(int i = 0; i<26; i++) {
+		printf("%c\n", singleFreqData[i].letter );
 	}
+
+	printf("%d\n", (int)strlen(input));
 	
-
-
 	return 0;
 
 }
