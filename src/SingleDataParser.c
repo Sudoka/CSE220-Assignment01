@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "Args.h"
-#include "global.h" 
+#include "Global.h" 
 #include "SingleDataParser.h"
 
 int totalSingleCount = 0;

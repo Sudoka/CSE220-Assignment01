@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 //our header files
-#include "global.h" 
+#include "Global.h" 
 #include "Args.h"
 #include "SingleDataParser.h"
 #include "PairDataParser.h"
