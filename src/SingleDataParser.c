@@ -9,7 +9,7 @@ int totalSingleCount = 0;
 static void findSingleTotal (singleFrequencyData *singleData) {
 	for (int i = 0; i < 26; i++) {
 		totalSingleCount += singleData[i].occurance;
-	}
+	}	
 }
 
 static void findSingleFrequency(singleFrequencyData *singleData) {

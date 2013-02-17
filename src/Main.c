@@ -1,6 +1,7 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 //our header files
 #include "Global.h" 
 #include "Args.h"
@@ -12,8 +13,40 @@ char *input;
 singleFrequencyData singleFreqData[26];
 pairFrequencyData pairFreqData[676];
 
+
+static void writeToFile() {
+	globalArgs.outFile = fopen(globalArgs.outFilePath, "a+");
+
+	fprintf(globalArgs.outFile, "%d letters\n",totalSingleCount );
+	for (int i = 0; i <26; i++) {
+		fprintf(globalArgs.outFile, "%c%9d%.5f\n",singleFreqData[i].letter, singleFreqData[i].occurance, singleFreqData[i].frequency);
+	}
+	fprintf(globalArgs.outFile, "%d digraphs\n", totalPairCount);
+	for (int i = 0; i <676; i++) {
+		fprintf(globalArgs.outFile, "%s%9d%.5f\n",pairFreqData[i].pair, pairFreqData[i].occurance, pairFreqData[i].frequency);
+	}
+	fclose(globalArgs.outFile);
+}
+
+static void printResults() {
+	printf("%d letters\n",totalSingleCount );
+	for (int i = 0; i <26; i++) {
+		printf("%c%9d %.5f\n",singleFreqData[i].letter, singleFreqData[i].occurance, singleFreqData[i].frequency);
+	}
+	printf("%d diagraphs\n", totalPairCount);
+	for (int i = 0; i <676; i++) {
+		printf("%s%9d %.5f\n",pairFreqData[i].pair, pairFreqData[i].occurance, pairFreqData[i].frequency);
+	}
+}
+
+static void makeAllLowercase(char* str) {
+	for (int i = 0; str[i] != '\0'; i++) {
+		str[i] = tolower(str[i]);
+	}
+}
+
 static void initAlphabet() {
-	for(int i = 'a'; i<= 'z'; i++) {		
+	for (int i = 'a'; i<= 'z'; i++) {		
 		singleFreqData[i-'a'].letter = (char) i;
 	}
 }
@@ -123,11 +156,16 @@ int main( int argc, char* argv[] ) {
 //All the buisness logic to parse the data
 	initAlphabet();
 	initPairs();
+	
+	makeAllLowercase(input);
 
 	parseSingleData(input, singleFreqData);
 	parsePairData(input, pairFreqData);
 
-	return 0;
+	// printResults();
+	writeToFile();
 
+
+	return 0;
 }
 
