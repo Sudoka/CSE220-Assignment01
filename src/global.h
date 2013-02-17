@@ -6,7 +6,7 @@ struct globalArgs_t {
    int csv;  //CSV option
    char* inFilePath;
    FILE* inFile;
-   char* outFileName;
+   char* outFilePath;
    FILE* outFile;
    int help; //help option
    int versionInfo; //version option
@@ -15,13 +15,13 @@ struct globalArgs_t {
  typedef struct {
    char letter;
    int occurance;
-   int frequency;
+   double frequency;
 } singleFrequencyData;
 
 typedef struct {   
-	char* pair;
+	char pair[3];
 	int occurance;
-	int frequency;
+	double frequency;
 } pairFrequencyData;
 
 extern struct globalArgs_t globalArgs;

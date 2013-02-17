@@ -1,8 +1,11 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <string.h>
+//our header files
 #include "global.h" 
 #include "Args.h"
+#include "SingleDataParser.h"
+#include "PairDataParser.h"
 
 char *input;
 
@@ -15,6 +18,51 @@ static void initAlphabet() {
 	}
 }
 
+static void initPairs() {
+	int count = 0;
+	while (count <676) {
+		for(int i ='a'; i<='z'; i++) {
+			for (int j = 'a'; j <= 'z' ; j++) {			
+				pairFreqData[count].pair[0] = (char) i;
+				pairFreqData[count].pair[1] = (char) j;
+				pairFreqData[count].pair[2] = '\0';
+				count++;
+			}
+		}
+
+	}
+}
+
+static char *getln(char *line)
+{
+    char *tmp = NULL;
+    size_t size = 0, index = 0;
+    int ch = EOF;
+
+    while (ch) {
+        ch = getc(stdin);
+
+        if (ch == EOF || ch == '\n') {
+            ch = 0;
+        }
+      
+        if (size <= index) {
+            size += 64;
+            tmp = realloc(line, size);
+            if (!tmp) {
+                free(line);
+                line = NULL;
+                break;
+            }
+            line = tmp;
+        }
+
+        line[index++] = ch;
+    }
+
+    return line;
+}
+
 static void printHelp() {
 	printf("Options:\n");
 	printf("\t%s\t\t%s\n", "-c", "Print results in csv format.");
@@ -22,6 +70,11 @@ static void printHelp() {
 	printf("\t%s\t\t%s\n", "-h", "Display this help messgae.");
 	printf("\t%s\t\t%s\n", "-o file", "Write the results 'file'.");
 	printf("\t%s\t\t%s\n", "-v", "Read the Display version info and exit.");
+}
+
+static void printVersion() {
+	printf("ellfa: version 1.0 (2013.1.16)\n");
+	printf("Brian Blanchard <brian.blanchard@webfilings.com> and Brittney Russell <bsrussell15@gmail.com>\n");
 }
 
 int main( int argc, char* argv[] ) {
@@ -32,12 +85,16 @@ int main( int argc, char* argv[] ) {
 		printHelp();
 		exit(EXIT_SUCCESS);		
 	} 
+	else if(globalArgs.versionInfo) {
+		printVersion();
+		exit(EXIT_SUCCESS);
+	}
 	else if (globalArgs.inFilePath !=NULL) {		
 		size_t len;
 		globalArgs.inFile = fopen(globalArgs.inFilePath, "r");
 
 		if(globalArgs.inFile == NULL) {
-			fprintf(stderr, "File does not exist: %s\n", globalArgs.inFilePath);
+			fprintf(stderr, "ellfa: could not open %s\n", globalArgs.inFilePath);
 			return EXIT_FAILURE;
 		}
 
@@ -60,14 +117,16 @@ int main( int argc, char* argv[] ) {
 
 	}
 	else {
-		input = (char*) malloc(10000);
-		fgets(input, 10000, stdin);
-		free(input);
+		input = getln(input);
+	}
 
-	}	
-
+//All the buisness logic to parse the data
 	initAlphabet();
-	
+	initPairs();
+
+	parseSingleData(input, singleFreqData);
+	parsePairData(input, pairFreqData);
+
 	return 0;
 
 }

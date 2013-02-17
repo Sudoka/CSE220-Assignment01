@@ -2,34 +2,31 @@
 #include <string.h>
 #include "Args.h"
 #include "global.h" 
+#include "SingleDataParser.h"
 
-static int total;
+int totalSingleCount = 0;
+
+static void findSingleTotal (singleFrequencyData *singleData) {
+	for (int i = 0; i < 26; i++) {
+		totalSingleCount += singleData[i].occurance;
+	}
+}
+
+static void findSingleFrequency(singleFrequencyData *singleData) {
+	for (int i = 0; i < 26; i++) {
+		singleData[i].frequency = ((double)singleData[i].occurance / totalSingleCount) * 100;
+	}
+}
 
 void parseSingleData(char *input, singleFrequencyData *singleData){
-
-	for(int i = 0; i <= 26; i++){
-		for(int j= 0; j!= '\0'; j++){
-			if(strcmp(input[j], singleData[i].letter[0]) == 0){
-				singleData[i].occurance ++;
-				
+	for (int i = 0; input[i] != '\0'; i++) {
+		for (int j = 0; j<26; j++) {			
+			if(input[i] == singleData[j].letter) {
+				singleData[j].occurance ++;
 			}
-
 		}
 	}
-
+	findSingleTotal(singleData);
+	findSingleFrequency(singleData);
 }
 
-static void findTotal(singleFrequencyData *singleData){
-	for(int i = 0; i<=26; i++){
-		if(singleData[i].occurance != 0){
-			total += singleData[i].occurance;
-		}
-	}
-}
-
-void findFrequency(singleFrequencyData *singleData){
-	for(int i = 0; i <=26; i++){
-		singleData[i].frequency = singleData[i].occurance / total;
-	}
-
-}
