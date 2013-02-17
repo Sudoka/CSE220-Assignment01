@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
-#include "global.h"
+#include "Global.h"
 #include "Args.h"
 
 static const char *optString = "cf:ho:v";
@@ -12,11 +12,11 @@ void parseArgs(int numArgs, char* args[]) {
 
 	globalArgs.csv = 0;
 	globalArgs.inFilePath = NULL;
-	globalArgs.outFileName = NULL;
+	globalArgs.outFilePath = NULL;
 	globalArgs.help = 0;
 	globalArgs.versionInfo = 0;
 
-	opt = getopt( numArgs, args, optString );
+	opt = getopt(numArgs, args, optString);
 	while( opt != -1 ) {
 		switch( opt ) {
 			case 'c':	
@@ -28,7 +28,7 @@ void parseArgs(int numArgs, char* args[]) {
 				break;
 				
 			case 'o':				
-				globalArgs.outFileName = optarg;				
+				globalArgs.outFilePath = optarg;				
 				break;
 				
 			case 'v':
