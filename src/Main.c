@@ -25,7 +25,7 @@ int main( int argc, char* argv[] ) {
 		printVersion();
 		exit(EXIT_SUCCESS);
 	}
-	else if (globalArgs.inFilePath !=NULL) {		
+	else if (globalArgs.inFilePath != NULL) {		
 		size_t len;
 		globalArgs.inFile = fopen(globalArgs.inFilePath, "r");
 
