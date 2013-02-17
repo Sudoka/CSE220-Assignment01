@@ -1,5 +1,5 @@
 #include <string.h>
-#include "global.h"
+#include "Global.h"
 #include "PairDataParser.h"
 
 int totalPairCount = 0;
