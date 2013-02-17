@@ -183,7 +183,7 @@ TestEllfaOpt
 
 # Test that -h has highest precedence.
 _msg="Testing that -h has highest precedence..."
-_options=" -c -f foo -o bar -h -v
+_options=" -c -f foo -o bar -h -v"
 _grep_str="Usage: ellfa"
 TestEllfaOpt
 

@@ -32,7 +32,8 @@ CFLAGS = -c -g -O0 -std=c99 -Wall
 SOURCES = Args.c      \
           Main.c      \
           SingleDataParser.c \
-          PairDataParser.c
+          PairDataParser.c  \
+          Helpers.c
 
 
 # Creates a macro named OBJECTS from SOURCES where each occurrence of .c in SOURCES is replaced by a .o in

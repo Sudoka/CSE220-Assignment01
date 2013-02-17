@@ -16,7 +16,7 @@ void parseArgs(int numArgs, char* args[]) {
 	globalArgs.help = 0;
 	globalArgs.versionInfo = 0;
 
-	opt = getopt( numArgs, args, optString );
+	opt = getopt(numArgs, args, optString);
 	while( opt != -1 ) {
 		switch( opt ) {
 			case 'c':	

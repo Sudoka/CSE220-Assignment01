@@ -12,7 +12,7 @@ static void findPairTotal (pairFrequencyData *pairData) {
 
 static void findFrequency(pairFrequencyData *pairData) {
 	for (int i = 0; i < 676; i++) {
-		pairData[i].frequency = ((double)pairData[i].occurance / totalPairCount) * 100;
+		pairData[i].frequency = ((float)pairData[i].occurance / (float)totalPairCount) * 100;
 	}
 }
 

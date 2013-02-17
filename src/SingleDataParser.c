@@ -14,7 +14,7 @@ static void findSingleTotal (singleFrequencyData *singleData) {
 
 static void findSingleFrequency(singleFrequencyData *singleData) {
 	for (int i = 0; i < 26; i++) {
-		singleData[i].frequency = ((double)singleData[i].occurance / totalSingleCount) * 100;
+		singleData[i].frequency = ((float)singleData[i].occurance / (float)totalSingleCount) * 100;
 	}
 }
 

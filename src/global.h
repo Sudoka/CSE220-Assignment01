@@ -15,13 +15,13 @@ struct globalArgs_t {
  typedef struct {
    char letter;
    int occurance;
-   double frequency;
+   float frequency;
 } singleFrequencyData;
 
 typedef struct {   
 	char pair[3];
 	int occurance;
-	double frequency;
+	float frequency;
 } pairFrequencyData;
 
 extern struct globalArgs_t globalArgs;
