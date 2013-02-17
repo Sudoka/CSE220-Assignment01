@@ -16,4 +16,7 @@ char *getln(char *line);
 void printHelp();
 void printVersion();
 
+void setUpFiles();
+FILE *seeIfFileExits(char *path, char *option);
+
 #endif

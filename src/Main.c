@@ -25,15 +25,11 @@ int main( int argc, char* argv[] ) {
 		printVersion();
 		exit(EXIT_SUCCESS);
 	}
-	else if (globalArgs.inFilePath != NULL) {		
-		size_t len;
-		printf("%s\n", globalArgs.inFilePath);
-		globalArgs.inFile = fopen(globalArgs.inFilePath, "r");
 
-		if(globalArgs.inFile == NULL) {
-			printf("could not open %s\n", globalArgs.inFilePath);
-			return EXIT_FAILURE;
-		}
+	setUpFiles();
+	
+	if (globalArgs.inFilePath != NULL) {		
+		size_t len;	
 
 		fseek(globalArgs.inFile, 0, SEEK_END);
 		len = ftell(globalArgs.inFile);

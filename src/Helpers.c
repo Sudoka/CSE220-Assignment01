@@ -4,15 +4,9 @@
 #include "Global.h"
 #include "SingleDataParser.h"
 #include "PairDataParser.h"
+#include "Helpers.h"
 
 void writeToFile(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {
-
-	globalArgs.outFile = fopen(globalArgs.outFilePath, "w");
-
-	if(globalArgs.outFile == NULL) {
-		printf("ellfa: could not open: %s\n",globalArgs.outFilePath);
-		exit(EXIT_FAILURE);
-	}
 
 	fprintf(globalArgs.outFile, "%d letters\n",totalSingleCount );
 	for (int i = 0; i <26; i++) {
@@ -137,4 +131,27 @@ void printHelp() {
 void printVersion() {
 	printf("ellfa: version 1.0 (2013.1.16)\n");
 	printf("Brian Blanchard <brian.blanchard@webfilings.com> and Brittney Russell <bsrussell15@gmail.com>\n");
+}
+
+void setUpFiles () {
+	if(globalArgs.inFilePath != NULL) {
+		globalArgs.inFile = seeIfFileExits(globalArgs.inFilePath, "r");
+	}
+	if(globalArgs.outFilePath != NULL) {
+		globalArgs.outFile = seeIfFileExits(globalArgs.outFilePath, "w");
+	}
+
+	if(globalArgs.inFile == NULL && globalArgs.inFilePath) {
+		printf("could not open: %s\n", globalArgs.inFilePath);
+		exit(EXIT_FAILURE);
+	}
+	if(globalArgs.outFile == NULL) {
+		printf("could not open %s\n", globalArgs.outFilePath);
+		exit(EXIT_FAILURE);
+	}	
+}
+
+FILE *seeIfFileExits(char *path, char *option) {
+	FILE *fileToOpen = fopen(path, option);
+	return fileToOpen;
 }
