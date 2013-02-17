@@ -69,9 +69,9 @@ int main( int argc, char* argv[] ) {
 	else if (globalArgs.outFilePath != NULL && (globalArgs.csv > 0)) {
 		writeToCsv(singleFreqData, pairFreqData);
 	}
-
-	// printResults();
-
+	else {
+		printResults(singleFreqData, pairFreqData);
+	}
 	return 0;
 }
 

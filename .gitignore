@@ -3,3 +3,4 @@
 *.o
 .DS_Store
 src/ellfa
+src/test/ellfa

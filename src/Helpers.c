@@ -22,7 +22,10 @@ void writeToFile(singleFrequencyData *singleFreqData, pairFrequencyData *pairFre
 	}
 	fprintf(globalArgs.outFile, "%d digraphs\n", totalPairCount);
 	for (int i = 0; i <676; i++) {
-		fprintf(globalArgs.outFile, "%s%9d %.5f\n",pairFreqData[i].pair, pairFreqData[i].occurance, pairFreqData[i].frequency);
+		fprintf(globalArgs.outFile, "%s", pairFreqData[i].pair);
+		fprintf(globalArgs.outFile, "%9d", pairFreqData[i].occurance);
+		fprintf(globalArgs.outFile, " %.5f\n", pairFreqData[i].frequency);
+
 	}
 	fclose(globalArgs.outFile);
 }
@@ -56,7 +59,7 @@ void writeToCsv(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreq
 void printResults(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {
 	printf("%d letters\n",totalSingleCount );
 	for (int i = 0; i <26; i++) {
-		printf("%c%9d %.5f\n",singleFreqData[i].letter, singleFreqData[i].occurance, singleFreqData[i].frequency);
+		printf("%c%10d%10.5f\n",singleFreqData[i].letter, singleFreqData[i].occurance, singleFreqData[i].frequency);
 	}
 	printf("%d diagraphs\n", totalPairCount);
 	for (int i = 0; i <676; i++) {
