@@ -27,7 +27,8 @@ int main( int argc, char* argv[] ) {
 	}
 
 	setUpFiles();
-	
+
+	//allocate memory for reading for a file
 	if (globalArgs.inFilePath != NULL) {		
 		size_t len;	
 
@@ -63,7 +64,7 @@ int main( int argc, char* argv[] ) {
 	if(globalArgs.outFilePath != NULL && (globalArgs.csv == 0)) {
 		writeToFile(singleFreqData, pairFreqData);
 	}
-	else if (globalArgs.outFilePath != NULL && (globalArgs.csv > 0)) {
+	else if (globalArgs.outFilePath != NULL && (globalArgs.csv != 0)) {
 		writeToCsv(singleFreqData, pairFreqData);
 	}
 	else {

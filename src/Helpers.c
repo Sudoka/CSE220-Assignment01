@@ -86,7 +86,7 @@ void initPairs(pairFrequencyData *pairFreqData) {
 		}
 	}
 }
-
+//This dynmaically allocated memeory for a user input
 char *getln(char *line)
 {
     char *tmp = NULL;
@@ -141,7 +141,7 @@ void setUpFiles () {
 		globalArgs.outFile = seeIfFileExits(globalArgs.outFilePath, "w");
 	}
 
-	if(globalArgs.inFile == NULL && globalArgs.inFilePath) {
+	if(globalArgs.inFile == NULL) {
 		printf("could not open: %s\n", globalArgs.inFilePath);
 		exit(EXIT_FAILURE);
 	}
