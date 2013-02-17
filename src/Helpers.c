@@ -35,7 +35,7 @@ void writeToCsv(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreq
 	globalArgs.outFile = fopen(globalArgs.outFilePath, "w");
 
 	if(globalArgs.outFile == NULL) {
-		printf("ellfa: could not open: %s\n",globalArgs.outFilePath);
+		printf("could not open: %s\n",globalArgs.outFilePath);
 		exit(EXIT_FAILURE);
 	}
 
@@ -124,6 +124,8 @@ char *getln(char *line)
 }
 
 void printHelp() {
+	printf("Usage: ellfa [option]...\n");
+	printf("Read English language text and calculate letter frequencies.\n\n");
 	printf("Options:\n");
 	printf("\t%s\t\t%s\n", "-c", "Print results in csv format.");
 	printf("\t%s\t\t%s\n", "-f file", "Read the text from 'file'.");

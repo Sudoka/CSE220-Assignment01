@@ -27,10 +27,11 @@ int main( int argc, char* argv[] ) {
 	}
 	else if (globalArgs.inFilePath != NULL) {		
 		size_t len;
+		printf("%s\n", globalArgs.inFilePath);
 		globalArgs.inFile = fopen(globalArgs.inFilePath, "r");
 
 		if(globalArgs.inFile == NULL) {
-			printf("ellfa: could not open %s\n", globalArgs.inFilePath);
+			printf("could not open %s\n", globalArgs.inFilePath);
 			return EXIT_FAILURE;
 		}
 
