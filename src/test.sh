@@ -94,7 +94,7 @@ TestEllfaOpt() {
 #---------------------------------------------------------------------------------------------------------------
 
 # The number of test cases to perform.
-_num_test_cases = 40
+_num_test_cases=40
 
 # _binary is the name of the executable program (i.e., in Unix lingo this is called a binary).
 _binary=./ellfa
@@ -183,7 +183,7 @@ TestEllfaOpt
 
 # Test that -h has highest precedence.
 _msg="Testing that -h has highest precedence..."
-_options=" -c -f foo -o bar -h -v"
+_options=" -c -f foo -o bar -h -v "
 _grep_str="Usage: ellfa"
 TestEllfaOpt
 
