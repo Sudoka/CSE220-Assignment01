@@ -18,7 +18,7 @@ void parseArgs(int numArgs, char* args[]) {
 	globalArgs.help = 0;
 	globalArgs.versionInfo = 0;
 
-	for (int i = 1; i < numArgs; i++) {			
+	for (int i = 1; i < numArgs; i++) {
 		if((strcmp(args[i], "-c")) == 0) {
 			globalArgs.csv = 1;
 		}
@@ -41,7 +41,7 @@ void parseArgs(int numArgs, char* args[]) {
 			}
 			else {
 				globalArgs.inFilePath = optarg;
-			}			
+			}
 		}
 		else if((strcmp(args[i], "-o")) == 0) {
 			if (i == numArgs-1) {
@@ -57,16 +57,20 @@ void parseArgs(int numArgs, char* args[]) {
 			else {
 				globalArgs.outFilePath = optarg;
 			}
-		}		
+		}
+		else if(args[i][0] == '-' && (args[i][1] != 'c' && args[i][1] != 'h' && args[i][1] != 'v' && args[i][1] != 'f' && args[i][1] != 'o')) {
+			printf("ellfa: invalid option\n");
+			exit(EXIT_FAILURE);
+		}
 		else {
 			if (optarg == NULL) {
 				printf("ellfa: unexpected string\n");
-				exit(EXIT_FAILURE);	
+				exit(EXIT_FAILURE);
 			}
 			else if (strcmp(optarg, args[i])) {
 				printf("ellfa: unexpected string\n");
 				exit(EXIT_FAILURE);
 			}
-		}		
+		}
 	}
 }
