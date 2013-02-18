@@ -14,7 +14,7 @@ void writeToFile(singleFrequencyData *singleFreqData, pairFrequencyData *pairFre
 		fprintf(globalArgs.outFile, "%10d",  singleFreqData[i].occurance);
 		fprintf(globalArgs.outFile, "%10.5f\n", singleFreqData[i].frequency);
 	}
-	fprintf(globalArgs.outFile, "%d digraphs\n", totalPairCount);
+	fprintf(globalArgs.outFile, "%d letter-pairs\n", totalPairCount);
 	for (int i = 0; i <676; i++) {
 		fprintf(globalArgs.outFile, "%s", pairFreqData[i].pair);
 		fprintf(globalArgs.outFile, "%9d", pairFreqData[i].occurance);
@@ -41,7 +41,7 @@ void writeToCsv(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreq
 		fprintf(globalArgs.outFile, "%.5f\n", singleFreqData[i].frequency);
 	}
 
-	fprintf(globalArgs.outFile, "%d,\"digraphs\"\n", totalPairCount);
+	fprintf(globalArgs.outFile, "%d,\"letter-pairs\"\n", totalPairCount);
 
 	for (int i = 0; i<676; i++) {
 		fprintf(globalArgs.outFile, "\"%s\",",pairFreqData[i].pair);
