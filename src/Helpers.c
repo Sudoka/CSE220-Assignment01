@@ -68,7 +68,7 @@ void makeAllLowercase(char* str) {
 }
 
 void initAlphabet(singleFrequencyData *singleFreqData) {
-	for (int i = 'a'; i<= 'z'; i++) {		
+	for (int i = 'a'; i<= 'z'; i++) {
 		singleFreqData[i-'a'].letter = (char) i;
 	}
 }
@@ -77,7 +77,7 @@ void initPairs(pairFrequencyData *pairFreqData) {
 	int count = 0;
 	while (count <676) {
 		for(int i ='a'; i<='z'; i++) {
-			for (int j = 'a'; j <= 'z' ; j++) {			
+			for (int j = 'a'; j <= 'z' ; j++) {
 				pairFreqData[count].pair[0] = (char) i;
 				pairFreqData[count].pair[1] = (char) j;
 				pairFreqData[count].pair[2] = '\0';
@@ -99,7 +99,7 @@ char *getln(char *line)
         if (ch == EOF || ch == '\n') {
             ch = 0;
         }
-      
+
         if (size <= index) {
             size += 64;
             tmp = realloc(line, size);
@@ -136,19 +136,20 @@ void printVersion() {
 void setUpFiles () {
 	if(globalArgs.inFilePath != NULL) {
 		globalArgs.inFile = seeIfFileExits(globalArgs.inFilePath, "r");
+		if(globalArgs.inFile == NULL) {
+
+			printf("could not open: %s\n", globalArgs.inFilePath);
+			exit(EXIT_FAILURE);
+		}
 	}
 	if(globalArgs.outFilePath != NULL) {
 		globalArgs.outFile = seeIfFileExits(globalArgs.outFilePath, "w");
-	}
 
-	if(globalArgs.inFile == NULL) {
-		printf("could not open: %s\n", globalArgs.inFilePath);
-		exit(EXIT_FAILURE);
+		if(globalArgs.outFile == NULL) {
+			printf("could not open %s\n", globalArgs.outFilePath);
+			exit(EXIT_FAILURE);
+		}
 	}
-	if(globalArgs.outFile == NULL) {
-		printf("could not open %s\n", globalArgs.outFilePath);
-		exit(EXIT_FAILURE);
-	}	
 }
 
 FILE *seeIfFileExits(char *path, char *option) {
