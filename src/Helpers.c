@@ -6,7 +6,7 @@
 #include "PairDataParser.h"
 #include "Helpers.h"
 
-void writeToFile(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {
+void writeToFile(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {	// write to a file if specified
 
 	fprintf(globalArgs.outFile, "%d letters\n",totalSingleCount );
 	for (int i = 0; i <26; i++) {
@@ -24,7 +24,7 @@ void writeToFile(singleFrequencyData *singleFreqData, pairFrequencyData *pairFre
 	fclose(globalArgs.outFile);
 }
 
-void writeToCsv(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {
+void writeToCsv(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {		// print in csv format if specified
 
 	globalArgs.outFile = fopen(globalArgs.outFilePath, "w");
 
@@ -50,7 +50,7 @@ void writeToCsv(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreq
 	}
 }
 
-void printResults(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {
+void printResults(singleFrequencyData *singleFreqData, pairFrequencyData *pairFreqData) {	// formats and prnts the results
 	printf("%d letters\n",totalSingleCount );
 	for (int i = 0; i <26; i++) {
 		printf("%c%10d%10.5f\n",singleFreqData[i].letter, singleFreqData[i].occurance, singleFreqData[i].frequency);
@@ -61,19 +61,19 @@ void printResults(singleFrequencyData *singleFreqData, pairFrequencyData *pairFr
 	}
 }
 
-void makeAllLowercase(char* str) {
+void makeAllLowercase(char* str) {							// makes all capitol letters in the input into lowercase letters
 	for (int i = 0; str[i] != '\0'; i++) {
 		str[i] = tolower(str[i]);
 	}
 }
 
-void initAlphabet(singleFrequencyData *singleFreqData) {
+void initAlphabet(singleFrequencyData *singleFreqData) {	// looks for letters from input and stores in the "array" singleFreqData
 	for (int i = 'a'; i<= 'z'; i++) {
 		singleFreqData[i-'a'].letter = (char) i;
 	}
 }
 
-void initPairs(pairFrequencyData *pairFreqData) {
+void initPairs(pairFrequencyData *pairFreqData) {			// looks for letter pairs from input and stores them
 	int count = 0;
 	while (count <676) {
 		for(int i ='a'; i<='z'; i++) {
@@ -86,6 +86,7 @@ void initPairs(pairFrequencyData *pairFreqData) {
 		}
 	}
 }
+
 //This dynmaically allocated memeory for a user input
 char *getln(char *line)
 {
@@ -117,7 +118,7 @@ char *getln(char *line)
     return line;
 }
 
-void printHelp() {
+void printHelp() {														// function is called if -h is entered, displays help mesage
 	printf("Usage: ellfa [option]...\n");
 	printf("Read English language text and calculate letter frequencies.\n\n");
 	printf("Options:\n");
@@ -128,14 +129,14 @@ void printHelp() {
 	printf("\t%s\t\t%s\n", "-v", "Read the Display version info and exit.");
 }
 
-void printVersion() {
+void printVersion() {													// function is called if -v is entered, displays version info
 	printf("ellfa: version 1.0 (2013.1.16)\n");
 	printf("Brian Blanchard <brian.blanchard@webfilings.com> and Brittney Russell <bsrussell15@gmail.com>\n");
 }
 
-void setUpFiles () {
+void setUpFiles () {													// function is called to check if the user wants to read from or write to a file,
+		globalArgs.inFile = seeIfFileExits(globalArgs.inFilePath, "r");	// that it exists
 	if(globalArgs.inFilePath != NULL) {
-		globalArgs.inFile = seeIfFileExits(globalArgs.inFilePath, "r");
 		if(globalArgs.inFile == NULL) {
 
 			printf("could not open: %s\n", globalArgs.inFilePath);
@@ -152,7 +153,7 @@ void setUpFiles () {
 	}
 }
 
-FILE *seeIfFileExits(char *path, char *option) {
+FILE *seeIfFileExits(char *path, char *option) {						// function is called above, checks to see if a file the user enters exists				
 	FILE *fileToOpen = fopen(path, option);
 	return fileToOpen;
 }

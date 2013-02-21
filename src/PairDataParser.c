@@ -4,19 +4,19 @@
 
 int totalPairCount = 0;
 
-static void findPairTotal (pairFrequencyData *pairData) {
+static void findPairTotal (pairFrequencyData *pairData) {		// finds the total number of pairs to calc. freq.
 	for (int i = 0; i < 676; i++) {
 		totalPairCount += pairData[i].occurance;
 	}	
 }
 
-static void findFrequency(pairFrequencyData *pairData) {
+static void findFrequency(pairFrequencyData *pairData) {		// finds the frequency of letter pairs 
 	for (int i = 0; i < 676; i++) {
 		pairData[i].frequency = ((float)pairData[i].occurance / (float)totalPairCount) * 100;
 	}
 }
 
-void parsePairData(char *input, pairFrequencyData *pairData) {	
+void parsePairData(char *input, pairFrequencyData *pairData) {	// reads the input and instructs to ignore approstaphy, stores, and calls to find frequency and occurance
 	for (int i = 1; input[i] != '\0'; i++) {
 
 		char inputPairs[3];
