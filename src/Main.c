@@ -53,7 +53,7 @@ int main( int argc, char* argv[] ) {
 	}
 
 //All the buisness logic to parse the data
-	initAlphabet(singleFreqData);		// calles function in helpers to see if a letter exists in the input
+	initAlphabet(singleFreqData);		// calls function in helpers to see if a letter exists in the input
 	initPairs(pairFreqData);
 	
 	makeAllLowercase(input);
